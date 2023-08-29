@@ -12,9 +12,9 @@ class PetList {
         this.petLista = [];
     }
     addPet(pet) {
-        if(!isURLValida(pet.photo)){
-            alert("URL inválida");
-            return;
+        if(anyInputs()){
+        }
+        else if(!isURLValida(pet.photo)){
         }
         this.petLista.push(pet);
         showPet();
@@ -53,6 +53,18 @@ function cleaerFields() {
     document.getElementById("photo").value = "";
     document.getElementById("date").value = "";
 };
+function anyInputs(){
+    let tutor = document.getElementById("tutor").value;
+    let namePet = document.getElementById("name-pet").value;
+    let specie = document.getElementById("species").value;
+    let photo = document.getElementById("photo").value;
+    let date = document.getElementById("date").value;
+    if(tutor == "" || namePet == "" || specie == "" || photo == "" || date == ""){
+        return true;
+    } else {
+        return false;
+    }
+}
 function isURLValida(url) {
     if(url.match(/\.(jpeg|jpg|gif|png)$/) != null){
         return true;
