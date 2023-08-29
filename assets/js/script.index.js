@@ -9,10 +9,11 @@ class Pet{
 }
 class PetList{
     constructor(){
-        this.petList = [];
+        this.petLista = [];
     }
     addPet(pet){
-        this.petList.push(pet);
+        this.petLista.push(pet);
+        showPet();
     }
 }
 const petList = new PetList();
@@ -25,4 +26,18 @@ function createPet(){
     const pet = new Pet(tutor,namePet,specie,photo,date);
     petList.addPet(pet);
     console.log(petList);
+}
+function showPet(){
+    const cotent = document.getElementById("pet-container");
+    cotent.innerHTML = "";
+    petList.petLista.forEach(pet =>{
+        const petDiv = `
+        <h2>Nome do Tutor:${pet.tutor}</h2>
+        <p>Nome do Pet:${pet.namePet}</p>
+        <p>Espêcie:${pet.specie}</p>
+        <img src="${pet.photo}" alt="${pet.namePet}">
+        <p>Data:${pet.date}</p>
+        `;
+        cotent.innerHTML += petDiv;
+});
 }
