@@ -12,13 +12,15 @@ class PetList {
         this.petLista = [];
     }
     addPet(pet) {
-        if(anyInputs()){
-        }
-        else if(!isURLValida(pet.photo)){
-        }
+        if (anyInputs()) {
+            envieMsg("Preencha todos os campos", "erro");
+        }else if (!isURLValida(pet.photo)) {
+            envieMsg("URL inválida", "erro");
+        }else {
         this.petLista.push(pet);
         showPet();
         cleaerFields();
+        }
     }
 }
 const petList = new PetList();
@@ -53,22 +55,33 @@ function cleaerFields() {
     document.getElementById("photo").value = "";
     document.getElementById("date").value = "";
 };
-function anyInputs(){
+function anyInputs() {
     let tutor = document.getElementById("tutor").value;
     let namePet = document.getElementById("name-pet").value;
     let specie = document.getElementById("species").value;
     let photo = document.getElementById("photo").value;
     let date = document.getElementById("date").value;
-    if(tutor == "" || namePet == "" || specie == "" || photo == "" || date == ""){
+    if (tutor == "" || namePet == "" || specie == "" || photo == "" || date == "") {
         return true;
     } else {
         return false;
     }
 }
 function isURLValida(url) {
-    if(url.match(/\.(jpeg|jpg|gif|png)$/) != null){
+    if (url.match(/\.(jpeg|jpg|gif|png)$/) != null) {
         return true;
     } else {
         return false;
     }
+}
+function envieMsg(msg, tipoMsg) {
+
+    let msgDiv = document.getElementById("msg");
+    msgDiv.innerHTML = "";
+    let msgParaTela = `
+     <p class="${tipoMsg}">${msg}</p> `
+    msgDiv.innerHTML += msgParaTela;
+    setTimeout(function () {
+        msgDiv.innerHTML = "";
+    }, 3000);
 }
