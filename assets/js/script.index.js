@@ -12,6 +12,10 @@ class PetList {
         this.petLista = [];
     }
     addPet(pet) {
+        if(!isURLValida(pet.photo)){
+            alert("URL inválida");
+            return;
+        }
         this.petLista.push(pet);
         showPet();
         cleaerFields();
@@ -49,3 +53,10 @@ function cleaerFields() {
     document.getElementById("photo").value = "";
     document.getElementById("date").value = "";
 };
+function isURLValida(url) {
+    if(url.match(/\.(jpeg|jpg|gif|png)$/) != null){
+        return true;
+    } else {
+        return false;
+    }
+}
