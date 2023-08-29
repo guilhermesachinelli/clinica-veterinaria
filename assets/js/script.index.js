@@ -5,6 +5,20 @@ class Pet {
         this.specie = specie;
         this.photo = photo;
         this.date = date;
+        this.age = this.calculateAge();
+    }
+
+    calculateAge() {
+        const today = new Date();
+        const birthdate = new Date(this.date);
+        let age = today.getFullYear() - birthdate.getFullYear();
+        const m = today.getMonth() - birthdate.getMonth();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+            age--;
+        }
+
+        return age;
     }
 }
 class PetList {
@@ -20,6 +34,7 @@ class PetList {
         this.petLista.push(pet);
         showPet();
         cleaerFields();
+        envieMsg("Pet Cadastrado", "success");
         }
     }
 }
@@ -39,11 +54,14 @@ function showPet() {
     cotent.innerHTML = "";
     petList.petLista.forEach(pet => {
         const petDiv = `
-        <h2>Nome do Tutor:${pet.tutor}</h2>
-        <p>Nome do Pet:${pet.namePet}</p>
-        <p>Espêcie:${pet.specie}</p>
+        <div class="pet-card">
         <img src="${pet.photo}" alt="${pet.namePet}">
-        <p>Data:${pet.date}</p>
+        <p><b>Nome do Tutor:</b>${pet.tutor}<p>
+        <p><b>Nome do Pet:</b>${pet.namePet}</p>
+        <p><b>Espêcie:</b>${pet.specie}</p>
+        <p><b>Data de Nascimento:</b>${ dateinPTBR(pet.date)}</p>
+        <p><b>Idade:</b>${pet.age}</p>
+        </div>
         `;
         cotent.innerHTML += petDiv;
     });
@@ -84,4 +102,17 @@ function envieMsg(msg, tipoMsg) {
     setTimeout(function () {
         msgDiv.innerHTML = "";
     }, 3000);
+}
+function dateinPTBR(date) {
+    return date.split('-').reverse().join('/')
+}
+function showRegister(){
+    document.getElementById("container").classList.remove("hidden");
+    document.getElementById("pet-container").classList.add("hidden");
+    document.getElementById("pet-card").classList.add("hidden");
+}
+function showListpet(){
+    document.getElementById("container").classList.add("hidden");
+    document.getElementById("pet-container").classList.remove("hidden");
+    document.getElementById("pet-card").classList.remove("hidden");
 }

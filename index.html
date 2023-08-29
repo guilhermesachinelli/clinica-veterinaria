@@ -7,6 +7,15 @@
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <h1>Clinica Veterinâria</h1>
+        <div>
+        <button onclick="showRegister()">Cadastro</button>
+        <button onclick="showListpet()">Exibição</button>
+    </div>
+    </header>
+    <div id="container">
+        <h1>Cadastro de Pets</h1>
     <div class="container-inputs">
         <label for="tutor">Tutor</label>
         <input type="text" id="tutor">
@@ -18,9 +27,11 @@
         <input type="text" id="photo">
         <label for="date">Data de Nascimento</label>
         <input type="date" id="date">
+        <div id="msg"></div>
         <button onclick="createPet()">Cadastre</button>
     </div>
-    <div id="pet-container"></div>
+</div>
+    <div id="pet-container" class="hidden   "></div>
     <script src="./assets/js/script.index.js"></script>
 </body>
 </html>
